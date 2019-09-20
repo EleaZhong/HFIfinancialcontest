@@ -31,7 +31,7 @@ def new(request):
         form = PostForm(request.POST)
         if form.is_valid():
             form.save()
-            print(request.POST['shit'])
+            #print(request.POST['shit'])
             return redirect('blog_home')        
     else:
         form = PostForm()
