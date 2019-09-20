@@ -19,3 +19,4 @@ urlpatterns = [
     path('deletepickle',views.delete_pickle,name='deletepickle'),
     path('country/',views.countryv,name='country')
 ]
+
