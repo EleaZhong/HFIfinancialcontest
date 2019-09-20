@@ -17,8 +17,7 @@ viewmoneyratio = {}
 
 def home(request):
     global content
-    loadall()  
-    loadjsonwrapper()
+    loader()
 
     content = Post.objects.all()
     content = reversed(content)
@@ -64,8 +63,7 @@ def teamlist(request):
 @login_required
 def teamhome(request,teamnum):
     global tlist
-    loadall()  
-    loadjsonwrapper()
+    loader()
 
     if teamnum > len(tlist)-1:
         return redirect('teamlist')
@@ -120,8 +118,7 @@ def teamhome(request,teamnum):
 
 
 def bidding(request):
-    loadall()  
-    loadjsonwrapper()
+    loader()
 
         
     text = {
@@ -138,8 +135,7 @@ def bidding(request):
     return render(request,'successful.html',{'text':text})
 @login_required
 def buyall(request):
-    loadall()  
-    loadjsonwrapper()
+    loader()
 
     buyallthings()
     text = {
@@ -157,8 +153,7 @@ def buyall(request):
 
 def buyallthings():
     global MAX_ITEMS
-    loadall()  
-    loadjsonwrapper()
+    loader()
 
     itemlist = {}
     for name in itemtype:
@@ -199,8 +194,7 @@ def buyallthings():
         team.items = []
 
 def countryv(request):
-    loadall()  
-    loadjsonwrapper()
+    loader()
 
     print(countrylist)
     
@@ -208,8 +202,7 @@ def countryv(request):
             
     
 def pickle_my_class(request):
-    loadall()  
-    loadjsonwrapper()
+    loader()
  
     text = {
         'title':'Pickle',
@@ -225,16 +218,14 @@ def pickle_my_class(request):
 
 def pickle_payload(request):
     #global MAX_ITEMS,MONEY_RATIO
-    loadall()
-    loadjsonwrapper()
+    loader()
 
     pickle.dump(tlist, open(os.path.join(BASE_DIR,'pickle/pickle.p'), "wb" ) )
     return redirect('teamlist')
 
 def delete_pickle(request):
     #global MAX_ITEMS,MONEY_RATIO
-    loadall()
-    loadjsonwrapper()
+    loader()
 
     path = os.path.join(BASE_DIR,'pickle/pickle.p')
     if os.path.exists(path) and os.path.isfile(path):
@@ -243,6 +234,15 @@ def delete_pickle(request):
     return redirect('teamlist')
 
 def load(request):
+    loader()
+    print('sdadaadad')
+    print(FDICT)
+    for team in tlist:
+        team.update()
+    print('ass')
+    return HttpResponse('')
+
+def loader():
     loadall()
     loadjsonwrapper()
     print('sdadaadad')
@@ -250,7 +250,8 @@ def load(request):
     for team in tlist:
         team.update()
     print('ass')
-    return HttpResponse('')
+
+
 
 
 
