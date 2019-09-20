@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Post
 from .forms import PostForm,NoForm,BuyForm,ExchangeForm
-from .factory import FDICT
+from .factory import FDICT,loadjsonwrapper
 from django.contrib.auth.decorators import login_required
 import pickle,os
 
@@ -17,6 +17,9 @@ viewmoneyratio = {}
 
 def home(request):
     global content
+    loadall()  
+    loadjsonwrapper()
+
     content = Post.objects.all()
     content = reversed(content)
     return render(request,'home.html',{'title':'ass','cts':content})
@@ -49,7 +52,7 @@ def teamhome_redirect(r):
 def teamlist(request):
     teams = []
     for t in tlist:
-        
+
         teams.append({
             'id':len(teams),
             'name':t.name,
@@ -61,6 +64,9 @@ def teamlist(request):
 @login_required
 def teamhome(request,teamnum):
     global tlist
+    loadall()  
+    loadjsonwrapper()
+
     if teamnum > len(tlist)-1:
         return redirect('teamlist')
     team = tlist[teamnum]
@@ -114,6 +120,9 @@ def teamhome(request,teamnum):
 
 
 def bidding(request):
+    loadall()  
+    loadjsonwrapper()
+
         
     text = {
         'title':'Bidding',
@@ -129,6 +138,9 @@ def bidding(request):
     return render(request,'successful.html',{'text':text})
 @login_required
 def buyall(request):
+    loadall()  
+    loadjsonwrapper()
+
     buyallthings()
     text = {
         'title':'Successful',
@@ -145,6 +157,9 @@ def buyall(request):
 
 def buyallthings():
     global MAX_ITEMS
+    loadall()  
+    loadjsonwrapper()
+
     itemlist = {}
     for name in itemtype:
         itemlist[name]=[]
@@ -184,13 +199,18 @@ def buyallthings():
         team.items = []
 
 def countryv(request):
+    loadall()  
+    loadjsonwrapper()
+
     print(countrylist)
     
     return render(request,'country.html',{'country':countrylist})
             
     
 def pickle_my_class(request):
-    loadall()   
+    loadall()  
+    loadjsonwrapper()
+ 
     text = {
         'title':'Pickle',
         'bigtitle':'Pickle My Classes',
@@ -206,13 +226,16 @@ def pickle_my_class(request):
 def pickle_payload(request):
     #global MAX_ITEMS,MONEY_RATIO
     loadall()
-    
+    loadjsonwrapper()
+
     pickle.dump(tlist, open(os.path.join(BASE_DIR,'pickle/pickle.p'), "wb" ) )
     return redirect('teamlist')
 
 def delete_pickle(request):
     #global MAX_ITEMS,MONEY_RATIO
     loadall()
+    loadjsonwrapper()
+
     path = os.path.join(BASE_DIR,'pickle/pickle.p')
     if os.path.exists(path) and os.path.isfile(path):
         os.remove(path)
@@ -221,6 +244,9 @@ def delete_pickle(request):
 
 def load(request):
     loadall()
+    loadjsonwrapper()
+    print('sdadaadad')
+    print(FDICT)
     for team in tlist:
         team.update()
     print('ass')
