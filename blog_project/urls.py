@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from Users import views as user_views
-
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('blog.urls')),
@@ -25,9 +25,4 @@ urlpatterns = [
     path(r'^tinymce/', include('tinymce.urls')),
     
 ]
-
-urlpatterns += patterns('',
-    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {
-        'document_root': settings.STATIC_ROOT,
-    }),
- )
+urlpatterns += staticfiles_urlpatterns()
