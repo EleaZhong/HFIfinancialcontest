@@ -12,6 +12,16 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+class PostWithImage(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    date_posted = models.DateTimeField(auto_now=False, auto_now_add=False,default=timezone.now)
+    authors = models.ForeignKey(User, on_delete=models.CASCADE,null = True, blank = True)
+    #shit = models.CharField(null=True,blank=True, max_length=50)
+    image = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=None)
+    def __str__(self):
+        return self.title
+
 class EnvVaribles(models.Model):
     moneyratio_a = models.FloatField(default=1,null=True)
     moneyratio_b = models.FloatField(default=1,null=True)

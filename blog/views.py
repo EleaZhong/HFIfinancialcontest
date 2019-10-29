@@ -23,6 +23,8 @@ def home(request):
     content = reversed(content)
     ct = Post.objects.filter(id=37)
     print(ct[0].id)
+    #u = request.user
+    #print(dir(u))
     return render(request,'home.html',{'title':'ass','cts':content})
 
 def individual(request,pk):
@@ -34,10 +36,13 @@ def features(request):
 
 def new(request):
     pt = Post.objects.first()
+    print(request.user)
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
-            form.save()
+            a = form.save()
+            a.authors = request.user
+            a.save()
             #print(request.POST['shit'])
             return redirect('blog_home')        
     else:

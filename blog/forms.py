@@ -10,7 +10,7 @@ class PostForm(forms.ModelForm):
 
     shit = forms.ChoiceField(choices=[('as','as'),('bs','bs')], required=False, widget=forms.RadioSelect)
     content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}), required=False)
-
+    
     class Meta:
         model = Post
         fields = ("title",'content','shit')

@@ -6,8 +6,16 @@
 <div class="card" style="width: 50vw;     margin:3% ">
   <div class="card-body">
     <h5 class="card-title">{{ct.title}}</h5>
-    
-    <h6 class="card-subtitle mb-2 text-muted">{{ct.authors}}</h6>
+    <div class="container">
+      <div class="row justify-content-start">
+        <div class="col-1">
+              <img src="{{ct.authors.profile.image.url}}" class="img-rounded" alt="x" width = 30 height = 30>
+        </div>
+        <div class="col-8">
+              <h6 class="card-subtitle mb-2 text-muted">{{ct.authors}}</h6>
+        </div>
+      </div>
+    </div> 
     <p class="card-text lead">{{ct.content | safe }}</p>
     <a href="/post/{{ct.id}}" class="btn btn-secondary">{{ct.date_posted | date:"D"}}---{{ct.id}}</a>
   </div>
