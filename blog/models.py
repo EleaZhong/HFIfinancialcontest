@@ -12,6 +12,20 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+
+class FilePost(models.Model):
+    name = models.CharField(max_length=50)
+    upload_file = models.FileField(upload_to="post_files")
+    
+
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("FilePost_detail", kwargs={"pk": self.pk})
+
+
 class PostWithImage(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()

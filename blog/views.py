@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import Post
-from .forms import PostForm,NoForm,BuyForm,ExchangeForm
+from .models import Post,FilePost
+from .forms import PostForm,NoForm,BuyForm,ExchangeForm,FilePostForm
 from .factory import FDICT,loadjsonwrapper
 from django.contrib.auth.decorators import login_required
 import pickle,os
@@ -14,15 +14,42 @@ from .teamlist import *
 viewmoneyratio = {}
 
 
+def upload_file(request):
+    if request.method == "POST":
+        form = FilePostForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            
+    else:
+        form = FilePostForm()
+    return render(request,'upload_file.html',{'title':'file','form':form})
+
+
+
+def files(request):
+    global content
+    
+
+    content = FilePost.objects.all()
+    
+    content = reversed(content)
+    #ct = Post.objects.filter(id=37)
+    #print(ct[0].id)
+    #u = request.user
+    #print(dir(u))
+    return render(request,'files.html',{'title':'ass','cts':content})
+
+
 
 def home(request):
     global content
     loader()
 
     content = Post.objects.all()
+    
     content = reversed(content)
-    ct = Post.objects.filter(id=37)
-    print(ct[0].id)
+    #ct = Post.objects.filter(id=37)
+    #print(ct[0].id)
     #u = request.user
     #print(dir(u))
     return render(request,'home.html',{'title':'ass','cts':content})

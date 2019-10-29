@@ -18,6 +18,8 @@ urlpatterns = [
     path('pickle_payload/',views.pickle_payload,name='picklepayload'),
     path('deletepickle',views.delete_pickle,name='deletepickle'),
     path('country/',views.countryv,name='country'),
-    path('post/<int:pk>',views.individual,name='blog_indie')
+    path('post/<int:pk>',views.individual,name='blog_indie'),
+    path('file/',views.upload_file,name='upload_file'),
+    path('files/',views.files,name='files')
 ]
 

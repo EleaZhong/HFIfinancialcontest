@@ -1,10 +1,18 @@
 from django import forms
-from .models import Post
+from .models import Post,FilePost
 from tinymce.widgets import TinyMCE
 from .teamlist import Teamlist,teamchoice
 
 #from django.contrib.auth.models import User
 #from django.contrib.auth.forms import UserCreationForm
+
+class FilePostForm(forms.ModelForm):
+    
+    class Meta:
+        model = FilePost
+        fields = ("name","upload_file")
+
+
 
 class PostForm(forms.ModelForm):
 

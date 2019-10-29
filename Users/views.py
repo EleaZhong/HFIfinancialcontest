@@ -32,12 +32,12 @@ def profile(request):
 @login_required
 def newprofile(request):
     if request.method == 'POST':
-        form = ProfileForm(request.POST,instance=request.user.profile)
+        form = ProfileForm(request.POST,request.FILES,instance=request.user.profile)
 
         if form.is_valid():
-            
+            print(request.FILES)
             form.save()
-            #return redirect('blog_home')
+            return redirect('tprofile')
     else:
         form = ProfileForm(instance=request.user.profile)
 

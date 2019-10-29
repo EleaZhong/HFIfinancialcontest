@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('blog.urls')),
     path('',include('Users.urls')),
+    
     path('reg/',user_views.register,name =  'user-reg'),
     path(r'^tinymce/', include('tinymce.urls')),
     

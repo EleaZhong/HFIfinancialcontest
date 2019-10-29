@@ -11,7 +11,7 @@ class UserRegForm(UserCreationForm):
         fields  = ['username','email','password1','password2']
 
 class ProfileForm(forms.ModelForm):
-    #ass = forms.CharField( max_length=9999, required=False)
+    ass = forms.CharField( max_length=9999, required=False)
     class Meta:
         model = Profile
         fields = ('image','bio')
