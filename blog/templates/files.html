@@ -17,7 +17,7 @@
         </div>
       </div>
     </div> 
-    <p class="card-text lead"><a href="{% url 'redirect_to_list' %}/media/{{ct.upload_file}}">{{ct.upload_file}}</a></p>
+    <p class="card-text lead"><a href="../media/{{ct.upload_file}}">{{ct.upload_file}}</a></p>
     <a href="/post/{{ct.id}}" class="btn btn-secondary">{{ct.date_posted | date:"D"}}---{{ct.id}}</a>
   </div>
 </div>
