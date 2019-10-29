@@ -21,12 +21,19 @@ def home(request):
 
     content = Post.objects.all()
     content = reversed(content)
+    ct = Post.objects.filter(id=37)
+    print(ct[0].id)
     return render(request,'home.html',{'title':'ass','cts':content})
+
+def individual(request,pk):
+    post = Post.objects.filter(id = pk)[0]
+    return render(request,'indie.html',{'title':str(post.id),'post':post})
 
 def features(request):
     return render(request,'features.html',{'title':'koo'})
 
 def new(request):
+    pt = Post.objects.first()
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
