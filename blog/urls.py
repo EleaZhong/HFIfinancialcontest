@@ -22,4 +22,3 @@ urlpatterns = [
     path('file/',views.upload_file,name='upload_file'),
     path('files/',views.files,name='files')
 ]
-
