@@ -5,6 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
+
 urlpatterns = [
     path('profile/',views.profile, name='blog_profile'),
     path('login/',auth_views.LoginView.as_view(template_name = 'login.html'), name='login'),
